@@ -1,0 +1,7 @@
+.gitignore
+.vagrant
+*.retry
+*.pyc
+*.sqlite3
+*.swp
+*.swo
