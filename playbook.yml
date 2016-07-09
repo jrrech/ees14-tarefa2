@@ -1,0 +1,17 @@
+---
+- hosts: all
+  vars:
+  remote_user: vagrant
+  tasks:
+  - name: Install dependencies
+    apt: name={{item}} state=installed
+    become_user: root
+    become: true
+    with_items:
+        - python3
+        - python-pip
+
+  - name: Installing django
+    become_user: root
+    become: true
+    pip: name=django state=present
