@@ -1,0 +1,74 @@
+@font-face { font-family: Titillium; src: url('fonts/Titillium-Regular.otf'); } 
+@font-face { font-family: Capture; src: url('fonts/Capture_it.ttf'); } 
+
+h1 a:hover {
+	text-decoration: none;
+}
+
+h2 a {
+	font-family: Titillium;
+}
+
+.titlebar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+.titlebar li {
+    float: left;
+}
+
+.titlebar li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.titlebar li a:hover {
+    background-color: #111;
+}
+
+.content {
+	margin-left: 20%;
+	padding: 1px 15px;
+}
+
+.navbar h1 {
+	font-family: Capture;
+	text-align: center;
+}
+
+.navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+	width: 20%;
+    background-color: #333;
+	list-style-type: none;
+    height: 100%; /* Full height */
+    position: fixed; /* Make it stick, even on scroll */
+    overflow: auto; /* Enable scrolling if the sidenav has too much content */
+}
+
+.navbar li a {
+    display: block;
+    color: white;
+    padding: 8px 0 8px 16px;
+    text-decoration: none;
+}
+
+/* Change the link color on hover */
+.navbar li a:hover {
+    background-color: #555;
+    color: white;
+}
+
+.active {
+    background-color: #000;
+    color: white;
+}
