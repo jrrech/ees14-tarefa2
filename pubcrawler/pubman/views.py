@@ -5,6 +5,11 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 from django.http import HttpResponse
 from .models import Author, Publication
+from django.views.static import serve
+
+def favico(request):
+    filepath = '../icon.jpg'
+    return serve(request, os.path.basename(filepath), os.path.dirname(filepath))
 
 def index(request):
     latest_pub_list = Publication.objects.order_by('-pub_date')[:5]
