@@ -6,6 +6,7 @@ from django.utils import timezone
 from django.http import HttpResponse
 from .models import Author, Publication
 from django.views.static import serve
+from django.contrib.auth.decorators import login_required
 
 def favico(request):
     filepath = '../icon.jpg'
