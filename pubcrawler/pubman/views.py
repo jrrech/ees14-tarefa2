@@ -7,12 +7,12 @@ from django.http import HttpResponse
 from .models import Author, Publication
 
 def index(request):
-	latest_pub_list = Publication.objects.order_by('-pub_date')[:5]
+    latest_pub_list = Publication.objects.order_by('-pub_date')[:5]
 
-	template = loader.get_template('pubman/index.html')
-	context = { 'latest_pub_list' : latest_pub_list, }
+    template = loader.get_template('pubman/index.html')
+    context = { 'latest_pub_list' : latest_pub_list, }
 
-	return HttpResponse(template.render(context, request))
+    return HttpResponse(template.render(context, request))
 
 def authors_index(request, letter):
     if 'All' in letter:
@@ -65,9 +65,10 @@ def pub_index(request, success = False):
         form1 = UserCreationForm()
         context = { 'pub_form' : form1 }
 
-	context = {}
-	return render(request, 'pubman/publications_index.html', context)
+    context = {}
+    return render(request, 'pubman/publications_index.html', context)
 
+@login_required
 def pub_create(request):
     new_pub = Publication(title=request.POST['title'])
     if new_pub is not None:
@@ -87,7 +88,7 @@ def pub_create(request):
     return pub_index(request, success=True)
 
 def publication_detail(request, pub_id):
-	return HttpResponse("Publication details request with id %s" % pub_id)
+    return HttpResponse("Publication details request with id %s" % pub_id)
 
 def my_profile(request):
-	return HttpResponse("MY PROFILE VIEW")
+    return HttpResponse("MY PROFILE VIEW")

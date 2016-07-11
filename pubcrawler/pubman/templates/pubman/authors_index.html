@@ -12,6 +12,8 @@ function go(sel){
 }
 </script>
 
+<head> <title>Pubcrawler</title></head>
+
 <body>
     <!-- Top title bar -->
     <div class="titlebar">
@@ -31,7 +33,7 @@ function go(sel){
     </div>
 
     <!-- View content container-->
-	<div class="content">
+    <div class="content">
         <h1>Authors database</h1>
         <label for="letter_select"> Last name initial:</label>
         <select id="letter_select" onchange="go(this)">
@@ -65,17 +67,16 @@ function go(sel){
             <option value="Z">Z</option>
         </select>
 
-    	{% if author_list %}
-    	    <ul>
-    	    {% for author in author_list %}
-    	        	<li>
-    					<a href="/authors/{{ author.id }}/">{{ author.last_name }}, {{ author.first_name }}</a>
-    				</li>
-    	    {% endfor %}
-    	    </ul>
-    	{% else %}
-    	    <div class="error"><p>No authors were found!</p></div>
-    	{% endif %}
-
-	</div>
+        {% if author_list %}
+            <ul>
+            {% for author in author_list %}
+                    <li>
+                        <a href="/authors/{{ author.id }}/">{{ author.last_name }}, {{ author.first_name }}</a>
+                    </li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <div class="error"><p>No authors were found!</p></div>
+        {% endif %}
+    </div>
 </body>

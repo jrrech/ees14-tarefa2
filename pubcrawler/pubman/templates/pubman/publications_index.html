@@ -12,6 +12,8 @@ function go(sel){
 }
 </script>
 
+<head> <title>Pubcrawler</title></head>
+
 <body>
     <!-- Top title bar -->
     <div class="titlebar">
@@ -31,7 +33,7 @@ function go(sel){
     </div>
 
     <!-- View content container-->
-	<div class="content">
+    <div class="content">
         <h3>File in a new publication</h3>
         {% if success %}
         <div class="success"><p>The new user was succesfully registered.</p></div>
@@ -55,5 +57,5 @@ function go(sel){
         <input type="submit"/>
         </form>
         {% endif %}
-	</div>
+    </div>
 </body>

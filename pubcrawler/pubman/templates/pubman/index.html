@@ -6,6 +6,9 @@
 <link rel="stylesheet" href="{% static 'css/pubman.css' %}">
 </head>
 
+
+<head> <title>Pubcrawler</title></head>
+
 <div class="titlebar">
     <ul>
     <li><h1><a href="/">Pubcrawler</a></h1></li>
@@ -13,30 +16,30 @@
 </div>
 
 <div class="sidebar">
-<ul>
-<li><a class="active" href="/">Home</a></li>
-<li><a href="/publications">All publications</a></li>
-<li><a href="/authors/A">Authors</a></li>
-<li><a href="/register">Register</a></li>
-</ul>
+    <ul>
+        <li><a class="active" href="/">Home</a></li>
+        <li><a href="/publications">All publications</a></li>
+        <li><a href="/authors/A">Authors</a></li>
+        <li><a href="/register">Register</a></li>
+    </ul>
 </div>
 
 <body>
-	<div class="content">
-	<h1><a href="/">Latest publications</a></h1>
+    <div class="content">
+    <h1><a href="/">Latest publications</a></h1>
 
-	{% if latest_pub_list %}
-	    <ul>
-	    {% for publication in latest_pub_list %}
-	        	<li>
-					<a href="/publications/{{ publication.id }}/">{{ publication.title }}</a>
-					<p>Added {{ publication.date_added }} </p>
-				</li>
-	    {% endfor %}
-	    </ul>
-	{% else %}
-	    <p>No publications available.</p>
-	{% endif %}
+    {% if latest_pub_list %}
+        <ul>
+        {% for publication in latest_pub_list %}
+            </li>
+                <a href="/publications/{{ publication.id }}/">{{ publication.title }}</a>
+                <p>Added {{ publication.date_added }} </p>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No publications available.</p>
+    {% endif %}
 
-	</div>
+    </div>
 </body>
