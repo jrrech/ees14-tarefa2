@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from django.template import loader
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 
 from django.http import HttpResponse
 from .models import Author, Publication
@@ -22,6 +24,23 @@ def authors_index(request, letter):
 
 def author_detail(request, author_id):
 	return HttpResponse("Author details request with id %s" % author_id)
+
+def register(request, success = False):
+    if success == True:
+        context = { 'success' : True }
+    else:
+        form1 = UserCreationForm()
+        context = { 'creation_form' : form1 }
+
+    return render(request, 'pubman/register.html', context)
+
+def author_create(request):
+    if request.POST['password1'] != request.POST['password2']:
+        return HttpResponse(" THE PASSWORDS DO NOT MATCH!")
+
+    User.objects.create_user(request.POST['username'], request.POST['email'], request.POST['password2'])
+
+    return register(request, success=True)
 
 def pub_index(request):
 	context = {}

@@ -1,0 +1,78 @@
+{% load staticfiles %}
+
+<head>
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="{% static 'css/pubman.css' %}">
+</head>
+
+<div class="titlebar">
+    <ul>
+    <li><h1><a href="/">Pubcrawler</a></h1></li>
+    <ul>
+</div>
+
+<div class="sidebar">
+<ul>
+<li><a href="/">Home</a></li>
+<li><a href="/publications">All publications</a></li>
+<li><a href="/authors/A">Authors</a></li>
+<li><a class="active" href="/register">Register</a></li>
+</ul>
+</div>
+
+<body>
+	<div class="content">
+        <h3>Register a new user</h3>
+
+<!--        <form action="/author_create/" method="post">
+        {% csrf_token %}
+        <p>First name:<input type="text" name="first_name"></p>
+        <p>Last name:<input type="text" name="last_name"></p>
+        <p>Email address:<input type="text" name="email"></p>
+        <p>Username:<input type="text" name="username"></p>
+        <p>Password:<input type="password" name="password"></p>
+        <input type="submit"/>
+        </form> -->
+        {% if creation_form %}
+        <form action="/author_create/" method="post">
+        {% csrf_token %}
+        <table>
+            <tr>
+                <th><label for="id_firstname">Fisrt name:</label></th>
+                <td><input id="id_firstname" maxlength=100 name="first_name" type="text" /></td>
+            </tr>
+            <tr>
+                <th><label for="id_lastname">Last name:</label></th>
+                <td><input id="id_lastname" maxlength=100 name="last_name" type="text" /></td>
+            </tr>
+            <tr>
+                <th><label for="id_email">E-mail address:</label></th>
+                <td><input id="id_email" maxlength=100 name="email" type="text" /></td>
+            </tr>
+            <tr>
+                <th>
+                    <label for="id_username">Username:</label>
+                </th>
+                <td>
+                    <input id="id_username" maxlength="30" name="username" type="text" /><br /><span class="helptext">Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only.</span>
+                </td>
+            </tr>
+            <tr>
+                <th><label for="id_password1">Password:</label></th>
+                <td><input id="id_password1" name="password1" type="password" /></td>
+            </tr>
+            <tr>
+                <th><label for="id_password2">Password confirmation:</label></th>
+                <td><input id="id_password2" name="password2" type="password" /><br /><span class="helptext">Enter the same password as before, for verification.</span></td>
+            </tr>
+        </table>
+        <input type="submit"/>
+        </form>
+        {% else %}
+            {% if success %}
+            <p>The new user was succesfully registered.</p>
+            {% endif %}
+        {% endif %}
+	</div>
+</body>
