@@ -32,8 +32,11 @@ function go(sel){
 
     <!-- View content container-->
 	<div class="content">
-        <select onchange="go(this)">
+        <h1>Authors database</h1>
+        <label for="letter_select"> Last name initial:</label>
+        <select id="letter_select" onchange="go(this)">
             <option selected disabled>{{ current_letter }}</option>
+            <option value="All">All</option>
             <option value="A">A</option>
             <option value="B">B</option>
             <option value="C">E</option>
@@ -71,7 +74,7 @@ function go(sel){
     	    {% endfor %}
     	    </ul>
     	{% else %}
-    	    <p>No authors were found!</p>
+    	    <div class="error"><p>No authors were found!</p></div>
     	{% endif %}
 
 	</div>

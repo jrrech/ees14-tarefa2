@@ -42,6 +42,14 @@ h1 a:hover {
     padding: 10px 15px;
 }
 
+.success p {
+    color: green;
+}
+
+.error p {
+    color: red;
+}
+
 .sidebar ul {
     margin: 0;
     padding: 0;

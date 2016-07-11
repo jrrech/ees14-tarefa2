@@ -1,0 +1,61 @@
+{% load staticfiles %}
+
+<head>
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="{% static 'css/pubman.css' %}">
+</head>
+
+<script type="text/javascript">
+function go(sel){
+    window.location.href = "/authors/" + sel.value;
+}
+</script>
+
+<body>
+    <!-- Top title bar -->
+    <div class="titlebar">
+        <ul>
+            <li><h1><a href="/">Pubcrawler</a></h1></li>
+        <ul>
+    </div>
+
+    <!-- Left side menu bar -->
+    <div class="sidebar">
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/publications">All publications</a></li>
+            <li><a class="active" href="/authors/A">Authors</a></li>
+            <li><a href="/register">Register</a></li>
+        </ul>
+    </div>
+
+    <!-- View content container-->
+	<div class="content">
+        {% if author %}
+
+        <h1>{{ author.last_name }}, {{ author.first_name }}</h1>
+
+        <h2>Publications by {{ author.first_name }} {{ author.last_name }}</h2>
+
+        {% if author_pub_list %}
+            <ul>
+            {% for publication in author_pub_list %}
+                    <li>
+                        <a href="/publications/{{ publication.id }}/">{{ publication.title }}</a>
+                        <p>Added {{ publication.date_added }} </p>
+                    </li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <p>No publications available!</p>
+        {% endif %}
+
+
+
+    	{% else %}
+    	    <div class="error"><p>Author not found.</p></div>
+    	{% endif %}
+
+	</div>
+</body>
