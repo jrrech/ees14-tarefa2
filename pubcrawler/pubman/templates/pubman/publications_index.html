@@ -6,9 +6,14 @@
 <link rel="stylesheet" href="{% static 'css/pubman.css' %}">
 </head>
 
-<div class="navbar">
+<div class="titlebar">
+    <ul>
+    <li><h1><a href="/">Pubcrawler</a></h1></li>
+    <ul>
+</div>
+
+<div class="sidebar">
 <ul>
-<h1><a href="/">Pubcrawler</a></h1>
 <li><a href="/">Home</a></li>
 <li><a class="active" href="/publications">All publications</a></li>
 <li><a href="/authors">Authors</a></li>
@@ -19,7 +24,7 @@
 <!--
 	<div class="content">
 	<h2><a href="/">Latest publications</a></h2>
-	
+
 	{% if latest_pub_list %}
 	    <ul>
 	    {% for publication in latest_pub_list %}

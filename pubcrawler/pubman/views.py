@@ -10,19 +10,18 @@ def index(request):
 	template = loader.get_template('pubman/index.html')
 	context = { 'latest_pub_list' : latest_pub_list, }
 
-	if not latest_pub_list:
-		output = "There are no publications yet!"
-	else:
-	    output = ', '.join([pub.title for pub in latest_pub_list])
-
 	return HttpResponse(template.render(context, request))
 
-def authors_index(request):
-	context = {}
-	return render(request, 'pubman/authors_index.html', context)
+def authors_index(request, letter):
+    author_list = Author.objects.filter(last_name__startswith='%c' % letter)
+
+    context = { 'author_list'       : author_list,
+                'current_letter'    : letter,
+    }
+    return render(request, 'pubman/authors_index.html', context)
 
 def author_detail(request, author_id):
-	return HttpResponse("Author details request with id %d" % author_id)
+	return HttpResponse("Author details request with id %s" % author_id)
 
 def pub_index(request):
 	context = {}
