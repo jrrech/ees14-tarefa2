@@ -18,9 +18,12 @@
     <div class="sidebar">
         <ul>
             <li><a href="/">Home</a></li>
-            <li><a class="active" href="/publications">All publications</a></li>
+			<li><a href="/publications/new">Add publication</a></li>
+			<li><a href="/publications">All publications</a></li>
+			<li><a class="active" href="/publications">    Publication details</a></li>
             <li><a href="/authors/All">Authors</a></li>
             <li><a href="/register">Register</a></li>
+            <li><a href="/login">Login</a></li>
         </ul>
     </div>
 
@@ -29,8 +32,9 @@
         {% if pub %}
 
         <h1>{{ pub.title }}</h1>
+        <h3><a>{{ pub.keywords }}</a></h3>
         {% for author in authors %}
-        <p> {{ author.last_name }}, {{ author.first_name }}</p>
+        <p>{{ author.last_name }}, {{ author.first_name }}. {{ pub.pub_date.year }}</p>
         {% endfor %}
 
         {% endif %}

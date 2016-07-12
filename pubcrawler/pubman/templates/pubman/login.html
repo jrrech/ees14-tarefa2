@@ -26,9 +26,11 @@ function go(sel){
     <div class="sidebar">
         <ul>
             <li><a href="/">Home</a></li>
-            <li><a class="active" href="/publications">All publications</a></li>
+			<li><a href="/publications/new">Add publication</a></li>
+			<li><a href="/publications">All publications</a></li>
             <li><a href="/authors/All">Authors</a></li>
             <li><a href="/register">Register</a></li>
+            <li><a class="active" href="/login">Login</a></li>
         </ul>
     </div>
 
@@ -42,8 +44,8 @@ function go(sel){
         <h1>Login</h1>
         <form action="/login/" method="post">
         {% csrf_token %}
-            {{form.username.label_tag}}{{form.username}}
-            {{form.password.label_tag}}{{form.password}}
+            {{form.username.label_tag}} {{form.username}}
+            {{form.password.label_tag}} {{form.password}}
             <input type="submit" id="submit" name="submit" value="Sign in" />
             <input type="hidden" name="next" value="{{ next }}" />
         </form>

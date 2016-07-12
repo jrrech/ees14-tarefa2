@@ -73,14 +73,19 @@ def author_create(request):
 ###################################################################################################
 
 def pub_index(request, success = False):
+    context = { 'pub_list' : Publication.objects.all() }
+
+    return render(request, 'pubman/publications_index.html', context)
+
+@login_required(login_url='/login/')
+def pub_add(request, success = False):
     if success == True:
-        print("SUCCESS!!\n")
         context = { 'success' : True }
     else:
         form1 = UserCreationForm()
         context = { 'pub_form' : form1 }
 
-    return render(request, 'pubman/publications_index.html', context)
+    return render(request, 'pubman/add_publication.html', context)
 
 @login_required(login_url='/login/')
 def pub_create(request):
@@ -91,6 +96,7 @@ def pub_create(request):
     if new_pub is not None:
         new_pub.date_added = timezone.localtime(timezone.now())
         new_pub.pub_date = timezone.localtime(timezone.now() - timezone.timedelta(days=1))
+        new_pub.keywords = request.POST['keywords']
         new_pub.save()
 
         try:
@@ -106,9 +112,7 @@ def pub_create(request):
         author.publication_set.add(new_pub)
         success = True
 
-    return pub_index(request, success)
-
-
+    return pub_add(request, success)
 
 def publication_detail(request, pub_id):
     pub = Publication.objects.get(id=pub_id)

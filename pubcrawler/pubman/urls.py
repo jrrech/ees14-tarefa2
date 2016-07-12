@@ -10,6 +10,7 @@ urlpatterns = [
     url(r'^favicon\.ico$', views.favico, name='favico'),
     url(r'^authors/(?P<letter>[a-zA-Z]+)/$', views.authors_index, name='authors'),
     url(r'^publications/$', views.pub_index, name='publications'),
+    url(r'^publications/new$', views.pub_add, name='publication_add'),
     url(r'^authors/(?P<author_id>[0-9]+)/$', views.author_detail, name='author_detail'),
     url(r'^publications/(?P<pub_id>[0-9]+)/$', views.publication_detail, name='publication_detail'),
     url(r'^register/$', views.register, name='register'),
