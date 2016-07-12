@@ -18,7 +18,7 @@
 <ul>
 <li><a href="/">Home</a></li>
 <li><a href="/publications">All publications</a></li>
-<li><a href="/authors/A">Authors</a></li>
+<li><a href="/authors/All">Authors</a></li>
 <li><a class="active" href="/register">Register</a></li>
 </ul>
 </div>
@@ -26,16 +26,6 @@
 <body>
 	<div class="content">
         <h3>Register a new user</h3>
-
-<!--        <form action="/author_create/" method="post">
-        {% csrf_token %}
-        <p>First name:<input type="text" name="first_name"></p>
-        <p>Last name:<input type="text" name="last_name"></p>
-        <p>Email address:<input type="text" name="email"></p>
-        <p>Username:<input type="text" name="username"></p>
-        <p>Password:<input type="password" name="password"></p>
-        <input type="submit"/>
-        </form> -->
         {% if creation_form %}
         <form action="/author_create/" method="post">
         {% csrf_token %}
@@ -57,7 +47,7 @@
                     <label for="id_username">Username:</label>
                 </th>
                 <td>
-                    <input id="id_username" maxlength="30" name="username" type="text" /><br /><span class="helptext">Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only.</span>
+                    <input id="id_username" maxlength="30" name="username" type="text" /><span class="helptext"> Required. 30 characters or fewer. Letters, digits and @/./+/-/_ only.</span>
                 </td>
             </tr>
             <tr>
@@ -66,8 +56,13 @@
             </tr>
             <tr>
                 <th><label for="id_password2">Password confirmation:</label></th>
-                <td><input id="id_password2" name="password2" type="password" /><br /><span class="helptext">Enter the same password as before, for verification.</span></td>
+                <td><input id="id_password2" name="password2" type="password" /><span class="helptext"> Enter the same password as before, for verification.</span></td>
             </tr>
+            <tr>
+                <td></td>
+                <td><input name="is_author" type="checkbox" value="True"/> I'm an author</td>
+            </tr>
+
         </table>
         <input type="submit"/>
         </form>

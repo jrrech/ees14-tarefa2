@@ -1,0 +1,53 @@
+{% load staticfiles %}
+
+<head>
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="{% static 'css/pubman.css' %}">
+</head>
+
+<script type="text/javascript">
+function go(sel){
+    window.location.href = "/authors/" + sel.value;
+}
+</script>
+
+<head> <title>Pubcrawler</title></head>
+
+<body>
+    <!-- Top title bar -->
+    <div class="titlebar">
+        <ul>
+            <li><h1><a href="/">Pubcrawler</a></h1></li>
+        <ul>
+    </div>
+
+    <!-- Left side menu bar -->
+    <div class="sidebar">
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a class="active" href="/publications">All publications</a></li>
+            <li><a href="/authors/All">Authors</a></li>
+            <li><a href="/register">Register</a></li>
+        </ul>
+    </div>
+
+    <!-- View content container-->
+    <div class="content">
+
+        {%if form.errors %}
+        <p> Invalid username/password combination, please try again </p>
+        {% endif %}
+
+        <h1>Login</h1>
+        <form action="/login/" method="post">
+        {% csrf_token %}
+            {{form.username.label_tag}}{{form.username}}
+            {{form.password.label_tag}}{{form.password}}
+            <input type="submit" id="submit" name="submit" value="Sign in" />
+            <input type="hidden" name="next" value="{{ next }}" />
+        </form>
+        <a href="password_reset/" id="forgot"> forgot username/password</a><br />
+        <a href="/register" id="new">new user</a>
+    </div>
+</body>

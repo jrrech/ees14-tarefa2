@@ -1,6 +1,7 @@
 from django.conf.urls import url
 from django.views.generic.edit import CreateView
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import views as auth_views
 
 from . import views
 
@@ -14,4 +15,5 @@ urlpatterns = [
     url(r'^register/$', views.register, name='register'),
     url(r'^author_create/$', views.author_create, name='author_create'),
     url(r'^pub_create/$', views.pub_create, name='pub_create'),
+    url(r'^login/$', auth_views.login, {'template_name':'pubman/login.html'}),
 ]

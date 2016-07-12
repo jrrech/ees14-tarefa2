@@ -15,10 +15,11 @@ def favico(request):
 def index(request):
     latest_pub_list = Publication.objects.order_by('-pub_date')[:5]
 
-    template = loader.get_template('pubman/index.html')
     context = { 'latest_pub_list' : latest_pub_list, }
 
-    return HttpResponse(template.render(context, request))
+    return render(request, 'pubman/index.html', context)
+
+###################################################################################################
 
 def authors_index(request, letter):
     if 'All' in letter:
@@ -49,34 +50,44 @@ def register(request, success = False):
     return render(request, 'pubman/register.html', context)
 
 def author_create(request):
+    success = False
     if request.POST['password1'] != request.POST['password2']:
         return HttpResponse(" THE PASSWORDS DO NOT MATCH!")
 
-    new_user = User.objects.create_user(request.POST['username'], request.POST['email'], request.POST['password2'])
-
-    if new_user is not None:
+    try:
+        User.objects.get(username=request.POST['username'])
+    except:
+        new_user = User.objects.create_user(request.POST['username'], request.POST['email'], request.POST['password2'])
         new_user.first_name = request.POST['first_name']
         new_user.last_name = request.POST['last_name']
-        new_user.save()
-        new_author = Author(first_name=new_user.first_name, last_name=new_user.last_name, user=new_user)
 
-    new_author.save()
+        if new_user is not None and request.POST.get('is_author'):
+            new_user.save()
+            new_author = Author(first_name=new_user.first_name, last_name=new_user.last_name, user=new_user)
+            new_author.save()
 
-    return register(request, success=True)
+        success = True
+
+    return register(request, success)
+
+###################################################################################################
 
 def pub_index(request, success = False):
     if success == True:
+        print("SUCCESS!!\n")
         context = { 'success' : True }
     else:
         form1 = UserCreationForm()
         context = { 'pub_form' : form1 }
 
-    context = {}
     return render(request, 'pubman/publications_index.html', context)
 
-@login_required
+@login_required(login_url='/login/')
 def pub_create(request):
+    success = False
+
     new_pub = Publication(title=request.POST['title'])
+
     if new_pub is not None:
         new_pub.date_added = timezone.localtime(timezone.now())
         new_pub.pub_date = timezone.localtime(timezone.now() - timezone.timedelta(days=1))
@@ -85,16 +96,35 @@ def pub_create(request):
         try:
             author = Author.objects.get(first_name=request.POST['author_first_name'],
                                     last_name=request.POST['author_last_name'])
+
         except:
             author = Author(first_name=request.POST['author_first_name'],
                             last_name=request.POST['author_last_name'])
 
-        author.publication_set.add(new_pub)
+            author.save()
 
-    return pub_index(request, success=True)
+        author.publication_set.add(new_pub)
+        success = True
+
+    return pub_index(request, success)
+
+
 
 def publication_detail(request, pub_id):
-    return HttpResponse("Publication details request with id %s" % pub_id)
+    pub = Publication.objects.get(id=pub_id)
 
-def my_profile(request):
-    return HttpResponse("MY PROFILE VIEW")
+    if pub is None:
+        return HttpResponse(" No publication with id %s" % pub_id)
+
+    authors = pub.authors.all()
+    for author in authors:
+        author.last_name = author.last_name.upper()
+
+    context = { 'pub' : pub,
+                'authors' : authors }
+
+    return render(request, 'pubman/publication_detail.html', context)
+
+###################################################################################################
+
+

@@ -27,7 +27,7 @@ function go(sel){
         <ul>
             <li><a href="/">Home</a></li>
             <li><a class="active" href="/publications">All publications</a></li>
-            <li><a href="/authors/A">Authors</a></li>
+            <li><a href="/authors/All">Authors</a></li>
             <li><a href="/register">Register</a></li>
         </ul>
     </div>
@@ -36,26 +36,26 @@ function go(sel){
     <div class="content">
         <h3>File in a new publication</h3>
         {% if success %}
-        <div class="success"><p>The new user was succesfully registered.</p></div>
+            <div class="success"><p>The publication was succesfully registered.</p></div>
         {% else %}
-        <form action="/pub_create/" method="post">
-        {% csrf_token %}
-        <table>
-            <tr>
-                <th><label for="id_title">Title:</label></th>
-                <td><input id="id_title" maxlength=100 name="title" type="text" /></td>
-            </tr>
-            <tr>
-                <th><label for="id_author_last_name">Author last name:</label></th>
-                <td><input id="id_author_last_name" maxlength=100 name="author_last_name" type="text" /></td>
-            </tr>
-            <tr>
-                <th><label for="id_author_first_name">Author first name:</label></th>
-                <td><input id="id_author_first_name" maxlength=100 name="author_first_name" type="text" /></td>
-            </tr>
-        </table>
-        <input type="submit"/>
-        </form>
+            <form action="/pub_create/" method="post">
+            {% csrf_token %}
+            <table>
+                <tr>
+                    <th><label for="id_title">Title:</label></th>
+                    <td><input id="id_title" maxlength=100 name="title" type="text" /></td>
+                </tr>
+                <tr>
+                    <th><label for="id_author_last_name">Author last name:</label></th>
+                    <td><input id="id_author_last_name" maxlength=100 name="author_last_name" type="text" /></td>
+                </tr>
+                <tr>
+                    <th><label for="id_author_first_name">Author first name:</label></th>
+                    <td><input id="id_author_first_name" maxlength=100 name="author_first_name" type="text" /></td>
+                </tr>
+            </table>
+            <input type="submit"/>
+            </form>
         {% endif %}
     </div>
 </body>
